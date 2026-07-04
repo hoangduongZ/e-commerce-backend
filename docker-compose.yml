@@ -1,0 +1,38 @@
+# Hạ tầng local dev: PostgreSQL 16 + Redis 7.
+# Credential dưới đây CHỈ dùng local (trùng default trong application.yml) — không phải secret production.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: electrostore-postgres
+    environment:
+      POSTGRES_DB: electrostore
+      POSTGRES_USER: electrostore
+      POSTGRES_PASSWORD: electrostore
+    ports:
+      # Override qua .env (POSTGRES_HOST_PORT=...) nếu máy đã có service chiếm 5432
+      - "${POSTGRES_HOST_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U electrostore -d electrostore"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: electrostore-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "${REDIS_HOST_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  postgres_data:
+  redis_data:

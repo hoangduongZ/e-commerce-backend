@@ -9,7 +9,8 @@ related: []
 
 **Đã làm:** 
 - Sửa lỗi action Trivy không chạy được do sai tag version (`0.29.0` không tồn tại, đổi thành `v0.36.0`).
-- Nâng cấp Spring Boot từ `3.5.3` lên `3.5.12` để vá 3 lỗ hổng HIGH do Trivy phát hiện ở thư viện `postgresql` và `spring-boot-starter-actuator`.
+- Nâng cấp Spring Boot từ `3.5.3` lên `3.5.12` để vá lỗ hổng của `spring-boot-starter-actuator`.
+- Override explicitly `postgresql.version` lên `42.7.11` trong `pom.xml` để vá lỗ hổng CVE-2026-42198 (vì Spring Boot 3.5.12 chỉ update lên 42.7.10).
 - Bổ sung cấu hình checkstyle `config/checkstyle/checkstyle.xml` (trước đó chưa commit) để fix lỗi maven-checkstyle-plugin.
 - Bổ sung `ErrorResponse.java` bị thiếu gây lỗi biên dịch trên CI.
 

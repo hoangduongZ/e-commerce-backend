@@ -34,7 +34,12 @@ build/
 
 ### App ###
 .env
+.mvn/jvm.config
 *.log
+logs/
+
+### Antigravity ###
+.agents/
 
 ### macOS ###
 .DS_Store

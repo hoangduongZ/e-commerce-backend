@@ -31,3 +31,17 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### App ###
+.env
+*.log
+
+### macOS ###
+.DS_Store
+.claude/context-routing.md
+.claude/memory-update-policy.md
+.claude/rules/coding-rules.md
+.claude/skills/knowledge-os/case-template.md
+.claude/skills/knowledge-os/kb-structure.md
+.claude/skills/knowledge-os/SKILL.md
+.claude/skills/task-wrapup/SKILL.md
